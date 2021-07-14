@@ -1,0 +1,60 @@
+.form-control {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  label {
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+
+  input {
+    font-family: inherit;
+    padding: 0.5rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $secondary-color;
+
+    &::placeholder {
+      font-size: 1.1rem;
+      color: $secondary-color;
+    }
+    &:focus {
+      outline: none;
+      border-bottom-width: 2px;
+    }
+  }
+  select {
+    width: 50%;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid $secondary-color;
+    color: $secondary-color;
+
+    &:focus {
+      outline: none;
+      border-width: 2px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .form-control {
+    label {
+      font-size: 1.5rem;
+    }
+
+    input {
+      &::placeholder {
+        font-size: 1.3rem;
+      }
+    }
+    select {
+      width: 30%;
+      font-size: 1.3rem;
+    }
+  }
+}

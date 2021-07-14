@@ -1,0 +1,59 @@
+.button {
+  position: relative;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid $secondary-color;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: $secondary-color;
+  z-index: 2;
+  font-family: inherit;
+  opacity: 0;
+  animation: fade-in 0.8s ease-out 1s forwards;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    width: 0%;
+    height: 0%;
+    border: 2px solid;
+    z-index: -1;
+    transition: all 0.3s ease;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-top-color: $secondary-color;
+    border-left-color: $secondary-color;
+  }
+  &::after {
+    bottom: 0;
+    right: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: $secondary-color;
+    border-right-color: $secondary-color;
+  }
+  &:hover {
+    border: none;
+  }
+
+  &:hover:before,
+  &:hover:after {
+    border-color: $secondary-color;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .button {
+    padding: 1rem;
+    font-size: 1.8rem;
+  }
+}

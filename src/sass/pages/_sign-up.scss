@@ -1,0 +1,114 @@
+.signup {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    -45deg,
+    $primary-color,
+    #afb1ff,
+    $secondary-color,
+    #abd9fa,
+    #c8e7ff
+  );
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  -webkit-perspective: 150rem;
+
+  &__container {
+    margin: 5rem 0;
+    width: 80%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 1rem;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+
+    &--title {
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 300;
+      color: $text-color;
+    }
+    &--title-2 {
+      font-size: 2rem;
+      font-family: $accent-font;
+    }
+  }
+  &__additional {
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+
+    &--text {
+      margin-right: 0.5rem;
+      font-size: 1rem;
+      color: $text-color;
+    }
+
+    &--button {
+      cursor: pointer;
+      color: $secondary-color;
+      padding: 0.5rem 0;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: underline;
+      transition: all 0.5s ease-out;
+
+      &:hover {
+        transform: translateX(1rem) scale(1.5);
+      }
+    }
+  }
+}
+
+.turn {
+  animation: turn 0.5s linear forwards;
+}
+
+@media screen and (min-width: 768px) {
+  .signup {
+    &__container {
+      width: 60%;
+
+      &--title {
+        font-size: 2rem;
+      }
+      &--title-2 {
+        font-size: 2.5rem;
+        font-family: $accent-font;
+      }
+    }
+    &__additional {
+      &--text {
+        font-size: 1.2rem;
+      }
+
+      &--button {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .signup {
+    &__container {
+      width: 50%;
+      max-width: 70rem;
+    }
+  }
+}
