@@ -4,6 +4,7 @@ import './sass/main.css';
 
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
 const Signup = React.lazy(() => import('./pages/Signup'));
+const HomePage = React.lazy(() => import('./pages/Homepage'));
 function App() {
   return (
     <Router>
@@ -14,6 +15,9 @@ function App() {
           </Route>
           <Route path='/signup'>
             <Signup />
+          </Route>
+          <Route path='/homepage'>
+            <HomePage />
           </Route>
         </Suspense>
       </Switch>

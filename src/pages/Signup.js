@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import FormControl from '../components/FormControl/FormControl';
 import Button from '../components/Button/Button';
 function Signup() {
   const containerRef = useRef();
+  const history = useHistory();
   const [title, setTitle] = useState(
     'This is your first step to organise your shopping list!'
   );
@@ -15,6 +17,8 @@ function Signup() {
     passwordTwo: '',
     gender: '',
   });
+
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const changeModeHandler = () => {
     containerRef.current.classList.add('turn');
@@ -37,41 +41,73 @@ function Signup() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // if (mode === 'signup') {
-    //   fetch('signup', {
-    //     method: 'POST',
-    //     'Content-Type': 'application/json',
-    //     body: JSON.stringify({
-    //       username: formData.username,
-    //       name: formData.name,
-    //       gender: formData.gender,
-    //       passwordOne: formData.passwordOne,
-    //       passwordTwo: formData.passwordTwo,
-    //     }),
-    //   }).then((res) => {
-    //     if (!res.ok) {
-    //       //...
-    //     } else {
-    //       res.json();
-    //     }
-    //   });
-    // } else if (mode === 'login') {
-    //   fetch('login', {
-    //     method: 'POST',
-    //     'Content-Type': 'application/json',
-    //     body: JSON.stringify({
-    //       username: formData.username,
-    //       passwordOne: formData.passwordOne,
-    //     }),
-    //   }).then((res) => {
-    //     if (!res.ok) {
-    //       //...
-    //     } else {
-    //       res.json();
-    //     }
-    //   });
-    // }
+
+    if (
+      !formData.username ||
+      !formData.name ||
+      !formData.passwordOne ||
+      !formData.passwordTwo ||
+      !formData.gender
+    ) {
+      return setErrorMsg('Please fill out all fields!');
+    }
+
+    if (mode === 'signup') {
+      fetch('http://localhost:5000/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.username.toLowerCase(),
+          name: formData.name,
+          gender: formData.gender,
+          passwordOne: formData.passwordOne,
+          passwordTwo: formData.passwordTwo,
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          if (!data.succes) setErrorMsg(data.message);
+          if (data.success) {
+            containerRef.current.classList.add('turn');
+            setMode('login');
+            setNewUser(false);
+            setTimeout(() => {
+              containerRef.current.classList.remove('turn');
+            }, 800);
+          }
+        })
+        .catch((err) => console.log(err));
+    } else if (mode === 'login') {
+      fetch('http://localhost:5000/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.username.toLowerCase(),
+          password: formData.passwordOne,
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          console.log(data);
+          if (data.message) setErrorMsg(data.message);
+          else {
+            localStorage.setItem('token', data.token);
+            history.replace('/homepage');
+          }
+        });
+    }
   };
   return (
     <main className='signup'>
@@ -126,12 +162,16 @@ function Signup() {
                 id='gender'
                 onChange={setUserInfo}
               >
-                <option>Non-binary</option>
-                <option>Female</option>
-                <option>Male</option>
+                <option value='' disabled>
+                  ---
+                </option>
+                <option value='non binary'>Non-binary</option>
+                <option value='female'>Female</option>
+                <option value='male'>Male</option>
               </select>
             </div>
           )}
+          {errorMsg && <p>{errorMsg}</p>}
           <Button text={mode === 'signup' ? 'Sign up' : 'Login'} />
         </form>
         <div className='signup__additional'>
