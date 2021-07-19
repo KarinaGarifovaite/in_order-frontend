@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import FormControl from '../components/FormControl/FormControl';
 import Button from '../components/Button/Button';
+
 function Signup() {
   const containerRef = useRef();
   const history = useHistory();
@@ -42,71 +43,75 @@ function Signup() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (
-      !formData.username ||
-      !formData.name ||
-      !formData.passwordOne ||
-      !formData.passwordTwo ||
-      !formData.gender
-    ) {
-      return setErrorMsg('Please fill out all fields!');
-    }
-
     if (mode === 'signup') {
-      fetch('http://localhost:5000/user/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: formData.username.toLowerCase(),
-          name: formData.name,
-          gender: formData.gender,
-          passwordOne: formData.passwordOne,
-          passwordTwo: formData.passwordTwo,
-        }),
-      })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
+      if (
+        !formData.username ||
+        !formData.name ||
+        !formData.passwordOne ||
+        !formData.passwordTwo ||
+        !formData.gender
+      ) {
+        return setErrorMsg('Please fill out all fields!');
+      } else {
+        fetch('http://localhost:5000/user/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: formData.username.toLowerCase(),
+            name: formData.name,
+            gender: formData.gender,
+            passwordOne: formData.passwordOne,
+            passwordTwo: formData.passwordTwo,
+          }),
         })
-        .then((data) => {
-          if (!data.succes) setErrorMsg(data.message);
-          if (data.success) {
-            containerRef.current.classList.add('turn');
-            setMode('login');
-            setNewUser(false);
-            setTimeout(() => {
-              containerRef.current.classList.remove('turn');
-            }, 800);
-          }
-        })
-        .catch((err) => console.log(err));
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+          })
+          .then((data) => {
+            if (!data.succes) setErrorMsg(data.message);
+            if (data.success) {
+              containerRef.current.classList.add('turn');
+              setMode('login');
+              setNewUser(false);
+              setTimeout(() => {
+                containerRef.current.classList.remove('turn');
+              }, 800);
+            }
+          })
+          .catch((err) => console.log(err));
+      }
     } else if (mode === 'login') {
-      fetch('http://localhost:5000/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: formData.username.toLowerCase(),
-          password: formData.passwordOne,
-        }),
-      })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
+      if (!formData.username || !formData.passwordOne) {
+        return setErrorMsg('Please fill out all fields!');
+      } else {
+        fetch('http://localhost:5000/user/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: formData.username.toLowerCase(),
+            password: formData.passwordOne,
+          }),
         })
-        .then((data) => {
-          console.log(data);
-          if (data.message) setErrorMsg(data.message);
-          else {
-            localStorage.setItem('token', data.token);
-            history.replace('/homepage');
-          }
-        });
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+          })
+          .then((data) => {
+            console.log(data);
+            if (data.message) setErrorMsg(data.message);
+            else {
+              localStorage.setItem('token', data.token);
+              history.replace('/homepage');
+            }
+          });
+      }
     }
   };
   return (
@@ -119,7 +124,7 @@ function Signup() {
         <form autoComplete='off' className='form' onSubmit={onSubmitHandler}>
           <FormControl
             labelText='*Username:'
-            placeholder='Choose username'
+            placeholder='Enter your username'
             type='text'
             id='username'
             value={formData.username}
@@ -171,8 +176,8 @@ function Signup() {
               </select>
             </div>
           )}
-          {errorMsg && <p>{errorMsg}</p>}
-          <Button text={mode === 'signup' ? 'Sign up' : 'Login'} />
+          {errorMsg && <p className='error-message'>{errorMsg}</p>}
+          <Button>{mode === 'signup' ? 'Sign up' : 'Login'}</Button>
         </form>
         <div className='signup__additional'>
           <h4 className='signup__additional--text'>Already have an account?</h4>

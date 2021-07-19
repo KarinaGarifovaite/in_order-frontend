@@ -2,6 +2,8 @@
   position: relative;
   margin: 1rem 0;
   padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
   background: transparent;
   border: 1px solid $secondary-color;
   text-transform: uppercase;
@@ -11,7 +13,9 @@
   font-family: inherit;
   opacity: 0;
   animation: fade-in 0.8s ease-out 1s forwards;
-
+  &__icon {
+    margin-right: 0.8rem;
+  }
   &::before,
   &::after {
     position: absolute;

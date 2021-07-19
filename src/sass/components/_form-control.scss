@@ -40,7 +40,11 @@
     }
   }
 }
-
+.error-message {
+  margin: 1rem 0;
+  color: rgb(146, 17, 17);
+  font-size: 1.3rem;
+}
 @media screen and (min-width: 768px) {
   .form-control {
     label {

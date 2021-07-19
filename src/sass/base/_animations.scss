@@ -47,3 +47,24 @@
     opacity: 1;
   }
 }
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes modal {
+  0% {
+    transform: translate(-50%, -50%) translateY(-150%);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(20%);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+}

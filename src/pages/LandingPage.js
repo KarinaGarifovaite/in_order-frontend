@@ -8,7 +8,7 @@ function LandingPage() {
         <span className='main__title--1'>Keep Your Shopping List</span>
         <span className='main__title--2'>in order.</span>
       </h1>
-      <Button path='/signup' text='Get started!' />
+      <Button path='/log'>Get started!</Button>
     </main>
   );
 }

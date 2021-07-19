@@ -1,0 +1,29 @@
+.header {
+  width: 100%;
+  position: fixed;
+  padding: 2rem;
+  top: 0;
+  background: $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__greeting {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-left: 0.5rem;
+    color: $text-color;
+    &--name {
+      color: $secondary-color;
+      font-style: italic;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    justify-content: flex-start;
+    &__greeting {
+      font-size: 3rem;
+    }
+  }
+}

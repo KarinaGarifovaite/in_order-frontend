@@ -1,0 +1,72 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  min-height: 15rem;
+  border: 1px solid $secondary-color;
+  z-index: 5;
+  background: $light-primary-color;
+  animation: modal 0.5s ease-out forwards;
+  box-shadow: 0 1rem 2rem rgba($secondary-color, 0.2);
+  &__header {
+    padding: 1rem;
+    background: $secondary-color;
+    color: $light-primary-color;
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+  &__children {
+    padding: 1.5rem;
+    margin-top: 1rem;
+    align-self: center;
+    font-size: 1.3rem;
+    &--text {
+      font-weight: 300;
+    }
+    &--buttons {
+      margin: 1rem 0;
+
+      button {
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        transition: all 0.5s ease-out;
+
+        &.cancel {
+          border: 1px solid currentColor;
+          color: $secondary-color;
+        }
+        &.delete {
+          border: 1px solid currentColor;
+          color: rgb(146, 17, 17);
+        }
+
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 50%;
+    &__header {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .modal {
+    max-width: 50rem;
+  }
+}

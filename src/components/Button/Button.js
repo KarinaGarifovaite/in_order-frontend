@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 function Button(props) {
   return props.path ? (
     <Link to={props.path} className='button'>
-      {props.text}
+      {props.children}
     </Link>
   ) : (
     <button onClick={props.onClick} className='button'>
-      {props.text}
+      {props.children}
     </button>
   );
 }

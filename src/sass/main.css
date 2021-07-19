@@ -78,10 +78,31 @@ body {
     opacity: 1;
   }
 }
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes modal {
+  0% {
+    transform: translate(-50%, -50%) translateY(-150%);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(20%);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+}
 .button {
   position: relative;
   margin: 1rem 0;
   padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
   background: transparent;
   border: 1px solid #069fa8;
   text-transform: uppercase;
@@ -91,6 +112,9 @@ body {
   font-family: inherit;
   opacity: 0;
   animation: fade-in 0.8s ease-out 1s forwards;
+}
+.button__icon {
+  margin-right: 0.8rem;
 }
 .button::before, .button::after {
   position: absolute;
@@ -171,6 +195,12 @@ body {
   border-width: 2px;
 }
 
+.error-message {
+  margin: 1rem 0;
+  color: #921111;
+  font-size: 1.3rem;
+}
+
 @media screen and (min-width: 768px) {
   .form-control label {
     font-size: 1.5rem;
@@ -191,6 +221,151 @@ body {
   align-items: center;
 }
 
+.user-control {
+  display: inline-block;
+}
+.user-control__icon {
+  position: relative;
+  cursor: pointer;
+  font-size: 3rem;
+  color: #069fa8;
+}
+.user-control__controls {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  position: absolute;
+  top: 5rem;
+  left: 5rem;
+  border: 1px solid #069fa8;
+  background: #fff;
+  transform-origin: top;
+  animation: grow 0.3s ease-out forwards;
+}
+.user-control__controls--list {
+  cursor: pointer;
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+  transition: 0.5s ease-out;
+  color: #222;
+}
+.user-control__controls--list.red {
+  color: #921111;
+  font-weight: 500;
+}
+.user-control__controls--list.bold {
+  font-weight: 500;
+}
+.user-control__controls--list:hover {
+  color: #069fa8;
+}
+
+@media screen and (min-width: 768px) {
+  .user-control__icon {
+    margin-left: 2rem;
+    font-size: 3.5rem;
+  }
+  .user-control__controls {
+    top: 6.5rem;
+  }
+}
+.header {
+  width: 100%;
+  position: fixed;
+  padding: 2rem;
+  top: 0;
+  background: #cfc7da;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header__greeting {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-left: 0.5rem;
+  color: #222;
+}
+.header__greeting--name {
+  color: #069fa8;
+  font-style: italic;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    justify-content: flex-start;
+  }
+  .header__greeting {
+    font-size: 3rem;
+  }
+}
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  min-height: 15rem;
+  border: 1px solid #069fa8;
+  z-index: 5;
+  background: #fff;
+  animation: modal 0.5s ease-out forwards;
+  box-shadow: 0 1rem 2rem rgba(6, 159, 168, 0.2);
+}
+.modal__header {
+  padding: 1rem;
+  background: #069fa8;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.modal__children {
+  padding: 1.5rem;
+  margin-top: 1rem;
+  align-self: center;
+  font-size: 1.3rem;
+}
+.modal__children--text {
+  font-weight: 300;
+}
+.modal__children--buttons {
+  margin: 1rem 0;
+}
+.modal__children--buttons button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  transition: all 0.5s ease-out;
+}
+.modal__children--buttons button.cancel {
+  border: 1px solid currentColor;
+  color: #069fa8;
+}
+.modal__children--buttons button.delete {
+  border: 1px solid currentColor;
+  color: #921111;
+}
+.modal__children--buttons button:hover {
+  opacity: 0.5;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 50%;
+  }
+  .modal__header {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .modal {
+    max-width: 50rem;
+  }
+}
 .main {
   height: 100vh;
   background-image: linear-gradient(to right bottom, rgba(34, 34, 34, 0.2), rgba(34, 34, 34, 0.2)), url("../assets/in-order2.jpeg");
@@ -332,6 +507,23 @@ body {
     width: 50%;
     max-width: 70rem;
   }
+}
+.homepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.homepage__add-btn {
+  margin: 15rem 0 10rem 0;
+}
+.homepage__shopping-list {
+  width: 100%;
+  background: #cfc7da;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*# sourceMappingURL=main.css.map */
