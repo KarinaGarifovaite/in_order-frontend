@@ -4,4 +4,35 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  &.absolute {
+    padding: 2rem;
+    border: 1px solid $secondary-color;
+    width: 80%;
+    background: $light-primary-color;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 8;
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.15);
+    animation: modal 0.5s ease-out forwards;
+    h4 {
+      margin: 1rem 0;
+      text-transform: uppercase;
+      font-weight: 300;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .form {
+    &.absolute {
+      width: 60%;
+
+      h4 {
+        font-size: 1.5rem;
+      }
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function FormControl(props) {
-  const { id, labelText, type, placeholder, value, onChange } = props;
+  const { id, labelText, type, placeholder, value, onChange, checked } = props;
   return (
     <div className='form-control'>
       <label htmlFor={id}>{labelText}</label>
@@ -12,6 +12,7 @@ function FormControl(props) {
         value={value}
         name={id}
         onChange={onChange}
+        checked={checked}
       />
     </div>
   );

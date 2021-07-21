@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { RiUserSettingsFill } from 'react-icons/ri';
 import Modal from '../Modal/Modal';
-
+import { UserContext } from '../../App';
 function UserControl() {
+  const userContext = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState(false);
   const history = useHistory();
@@ -14,6 +15,7 @@ function UserControl() {
   const logoutHandler = () => {
     localStorage.removeItem('token');
     history.replace('/');
+    userContext.setIsAuth(false);
   };
 
   const deleteAccountHandler = () => {
@@ -26,6 +28,7 @@ function UserControl() {
       },
     });
     localStorage.removeItem('token');
+    useContext.isAuth(false);
     history.replace('/');
   };
 

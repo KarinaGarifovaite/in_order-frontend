@@ -1,9 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import FormControl from '../components/FormControl/FormControl';
 import Button from '../components/Button/Button';
+import { UserContext } from '../App';
 
 function Signup() {
+  const userContext = useContext(UserContext);
   const containerRef = useRef();
   const history = useHistory();
   const [title, setTitle] = useState(
@@ -108,13 +111,16 @@ function Signup() {
             if (data.message) setErrorMsg(data.message);
             else {
               localStorage.setItem('token', data.token);
+              userContext.setIsAuth(true);
               history.replace('/homepage');
             }
           });
       }
     }
   };
-  return (
+  return userContext.isAuth ? (
+    <Redirect to='/homepage' />
+  ) : (
     <main className='signup'>
       <div className='signup__container' ref={containerRef}>
         <h2 className='signup__container--title'>{title}</h2>

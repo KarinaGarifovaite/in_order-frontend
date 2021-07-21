@@ -7,6 +7,7 @@
 
 body {
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 html {
@@ -220,7 +221,34 @@ body {
   justify-content: center;
   align-items: center;
 }
+.form.absolute {
+  padding: 2rem;
+  border: 1px solid #069fa8;
+  width: 80%;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.15);
+  animation: modal 0.5s ease-out forwards;
+}
+.form.absolute h4 {
+  margin: 1rem 0;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.2rem;
+}
 
+@media screen and (min-width: 1024px) {
+  .form.absolute {
+    width: 60%;
+  }
+  .form.absolute h4 {
+    font-size: 1.5rem;
+  }
+}
 .user-control {
   display: inline-block;
 }
@@ -278,6 +306,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 5;
 }
 .header__greeting {
   font-size: 2rem;
@@ -366,6 +395,15 @@ body {
     max-width: 50rem;
   }
 }
+.overlay {
+  margin-top: -2rem;
+  position: absolute;
+  height: 110vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 5;
+}
+
 .main {
   height: 100vh;
   background-image: linear-gradient(to right bottom, rgba(34, 34, 34, 0.2), rgba(34, 34, 34, 0.2)), url("../assets/in-order2.jpeg");
@@ -515,15 +553,58 @@ body {
   align-items: center;
 }
 .homepage__add-btn {
-  margin: 15rem 0 10rem 0;
+  margin: 17rem 0;
+  height: calc(50vh - 38.3rem);
 }
 .homepage__shopping-list {
   width: 100%;
   background: #cfc7da;
-  height: 50vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.homepage__shopping-list--title {
+  margin: 2rem 0;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #222;
+}
+
+@media screen and (min-width: 768px) {
+  .homepage__add-btn {
+    margin-top: 20rem;
+    height: calc(50vh - 40rem);
+  }
+  .homepage__shopping-list--title {
+    margin: 4rem 0;
+    font-size: 3.5rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .homepage {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .homepage__add-btn {
+    width: 50%;
+    height: calc(100vh - 9rem);
+    margin: 9rem 0 0;
+    padding-top: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .homepage__shopping-list {
+    border-top: 2px solid #069fa8;
+    border-left: 2px solid #069fa8;
+    margin: 9rem 0 0 0;
+    width: 50%;
+    height: calc(100vh - 9rem);
+  }
+  .homepage__shopping-list--title {
+    margin: 3rem 0;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

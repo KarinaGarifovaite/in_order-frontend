@@ -5,15 +5,68 @@
   align-items: center;
 
   &__add-btn {
-    margin: 15rem 0 10rem 0;
+    margin: 17rem 0;
+    height: calc(50vh - 38.3rem);
   }
 
   &__shopping-list {
     width: 100%;
     background: $primary-color;
-    height: 50vh;
+    height: 55vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &--title {
+      margin: 2rem 0;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: $text-color;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .homepage {
+    &__add-btn {
+      margin-top: 20rem;
+      height: calc(50vh - 40rem);
+    }
+
+    &__shopping-list {
+      &--title {
+        margin: 4rem 0;
+        font-size: 3.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .homepage {
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__add-btn {
+      width: 50%;
+      height: calc(100vh - 9rem);
+      margin: 9rem 0 0;
+      padding-top: 30rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    &__shopping-list {
+      border-top: 2px solid $secondary-color;
+      border-left: 2px solid $secondary-color;
+      margin: 9rem 0 0 0;
+      width: 50%;
+      height: calc(100vh - 9rem);
+
+      &--title {
+        margin: 3rem 0;
+      }
+    }
   }
 }

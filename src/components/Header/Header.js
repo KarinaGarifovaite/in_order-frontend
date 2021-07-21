@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import UserControl from '../UserControl/UserControl';
+import { UserContext } from '../../App';
 
 function Header() {
+  const userContext = useContext(UserContext);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/user', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'in_order-token': localStorage.getItem('token'),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setUser(data));
-  }, []);
+    setUser(userContext.user);
+  }, [userContext.user]);
 
   const greeting = (name) => {
     const time = new Date().getHours();
