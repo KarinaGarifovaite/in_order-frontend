@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
+import {
+  IoFastFoodOutline,
+  IoHomeOutline,
+  IoBagHandleOutline,
+  IoShirtOutline,
+  IoChevronDownOutline,
+} from 'react-icons/io5';
+
 function ShoppingItem(props) {
-  const { title, description, category, primary } = props;
+  const { title, description, category, primary, onDelete } = props;
+  const [showDesc, setShowDesc] = useState(false);
+
+  let icon;
+
+  if (category === 'groceries') icon = <IoFastFoodOutline />;
+  if (category === 'clothes') icon = <IoShirtOutline />;
+  if (category === 'home') icon = <IoHomeOutline />;
+  if (category === 'other') icon = <IoBagHandleOutline />;
+
+  const showDescription = () => {
+    setShowDesc((prev) => !prev);
+  };
+
   return (
-    <li>
-      {primary && <AiFillStar />}
-      <h3>{title}</h3>
-      <small>{category}</small>
-      <p>{description}</p>
+    <li className='shopping-item'>
+      {primary && <AiFillStar className='shopping-item__icon' />}
+      <h3 className='shopping-item__title' onClick={onDelete}>
+        {title}
+      </h3>
+      <small className='shopping-item__category'>{icon}</small>
+      <IoChevronDownOutline
+        className='shopping-item__chevron'
+        onClick={showDescription}
+      />
+      {showDesc && (
+        <p className='shopping-item__description'>
+          {description ? description : 'No description'}
+        </p>
+      )}
     </li>
   );
 }

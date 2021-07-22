@@ -12,7 +12,7 @@
   &__shopping-list {
     width: 100%;
     background: $primary-color;
-    height: 55vh;
+    min-height: 55vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,7 +62,7 @@
       border-left: 2px solid $secondary-color;
       margin: 9rem 0 0 0;
       width: 50%;
-      height: calc(100vh - 9rem);
+      min-height: calc(100vh - 9rem);
 
       &--title {
         margin: 3rem 0;

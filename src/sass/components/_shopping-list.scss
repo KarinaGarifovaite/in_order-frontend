@@ -1,0 +1,105 @@
+.shopping-list {
+  margin-bottom: 3rem;
+  width: 80%;
+  max-height: 35rem;
+  overflow-y: scroll;
+  background: rgba($light-primary-color, 0.25);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $secondary-color;
+
+  &__empty {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: $text-color;
+  }
+
+  &__sort {
+    width: 80%;
+    margin: 2rem 0;
+    label {
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-right: 1rem;
+    }
+    select {
+      width: 50%;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.5rem;
+      background: transparent;
+      border: 1px solid $secondary-color;
+      color: $secondary-color;
+
+      &:focus {
+        outline: none;
+        border-width: 2px;
+      }
+    }
+  }
+}
+
+.shopping-item {
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid $secondary-color;
+  animation: fade-in 0.5s ease-out forwards;
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  &__icon {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: $secondary-color;
+  }
+
+  &__description {
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 1.3rem;
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  &__category {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: rgb(145, 57, 72);
+  }
+
+  &__chevron {
+    font-size: 1.5rem;
+    margin-left: auto;
+    color: $secondary-color;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .shopping-list {
+    &__sort {
+      label {
+        font-size: 1.5rem;
+      }
+      select {
+        width: 30%;
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  .shopping-item {
+    &__title {
+      font-size: 1.6rem;
+    }
+  }
+}
