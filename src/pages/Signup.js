@@ -67,7 +67,7 @@ function Signup() {
       ) {
         return setErrorMsg('Please fill out all fields!');
       } else {
-        fetch('http://localhost:5000/user/signup', {
+        fetch('https://in-order-app.herokuapp.com/user/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ function Signup() {
       if (!formData.username || !formData.passwordOne) {
         return setErrorMsg('Please fill out all fields!');
       } else {
-        fetch('http://localhost:5000/user/login', {
+        fetch('https://in-order-app.herokuapp.com/user/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -120,7 +120,6 @@ function Signup() {
             }
           })
           .then((data) => {
-            console.log(data);
             if (data.message) setErrorMsg(data.message);
             else {
               localStorage.setItem('token', data.token);
