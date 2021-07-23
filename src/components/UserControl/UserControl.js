@@ -40,7 +40,7 @@ function UserControl() {
       },
     });
     localStorage.removeItem('token');
-    useContext.setIsAuth(false);
+    userContext.setIsAuth(false);
     history.replace('/');
   };
 
