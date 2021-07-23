@@ -6,12 +6,16 @@ import ItemForm from '../components/ItemForm/ItemForm';
 import ShoppingList from '../components/ShoppingList/ShoppingList';
 
 function Homepage() {
+  // State for showing new item form
   const [showForm, setShowForm] = useState(false);
 
+  // Functions
+  // To show form
   const showItemForm = () => {
     setShowForm(true);
   };
 
+  // Close item form
   const closeItemFormHandler = (e) => {
     if (e.target.classList.contains('overlay')) setShowForm(false);
   };

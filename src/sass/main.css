@@ -98,6 +98,19 @@ body {
     transform: translate(-50%, -50%) translateY(0);
   }
 }
+@keyframes moving {
+  0% {
+    left: 20%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    left: 80%;
+    opacity: 0;
+  }
+}
 .button {
   position: relative;
   margin: 1rem 0;
@@ -387,6 +400,28 @@ body {
 
   .shopping-item__title {
     font-size: 1.6rem;
+  }
+}
+.spinner {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(207, 199, 218, 0.5);
+}
+.spinner__icon-cart {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  color: #069fa8;
+  animation: moving 2s ease-in-out infinite;
+}
+
+@media screen and (min-width: 768px) {
+  .spinner__icon-cart {
+    font-size: 7rem;
+    color: #069fa8;
+    animation: moving 4s ease-in-out infinite;
   }
 }
 .header {

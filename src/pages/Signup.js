@@ -6,9 +6,16 @@ import Button from '../components/Button/Button';
 import { UserContext } from '../App';
 
 function Signup() {
+  // User context from App.js
   const userContext = useContext(UserContext);
+
+  // useRef for adding animation
   const containerRef = useRef();
+
+  //useHistory
   const history = useHistory();
+
+  //States
   const [title, setTitle] = useState(
     'This is your first step to organise your shopping list!'
   );
@@ -21,9 +28,10 @@ function Signup() {
     passwordTwo: '',
     gender: '',
   });
-
   const [errorMsg, setErrorMsg] = useState(null);
 
+  // Functions
+  // changind mode login/signup and adding animation to the container
   const changeModeHandler = () => {
     containerRef.current.classList.add('turn');
     setNewUser((prevState) => !prevState);
@@ -39,13 +47,16 @@ function Signup() {
     }, 800);
   };
 
+  // handeling inputs changes
   const setUserInfo = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Form submition
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
+    // For signing up, handeling error, inputs validation
     if (mode === 'signup') {
       if (
         !formData.username ||
@@ -87,6 +98,8 @@ function Signup() {
           })
           .catch((err) => console.log(err));
       }
+
+      // Handeling logining in, saving token to local storage ant redirecting user to the homepage
     } else if (mode === 'login') {
       if (!formData.username || !formData.passwordOne) {
         return setErrorMsg('Please fill out all fields!');
@@ -118,6 +131,8 @@ function Signup() {
       }
     }
   };
+
+  // If user is authenticated (if there is a token in local storage), he is redirected to homepage
   return userContext.isAuth ? (
     <Redirect to='/homepage' />
   ) : (

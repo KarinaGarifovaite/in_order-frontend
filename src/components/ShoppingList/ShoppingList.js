@@ -2,22 +2,35 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../App';
 import ShoppingItem from '../ShoppingItem/ShoppingItem';
 function ShoppingList() {
+  // user context
   const { user } = useContext(UserContext);
+
+  // states
   const [filteredBy, setFilteredBy] = useState('all');
   const [filteredList, setFilteredList] = useState([]);
 
+  // useEffects
+
+  // for setting users shopping list as initial filteredList
   useEffect(() => {
     if (user) setFilteredList(user.shoppingList);
   }, [user]);
 
+  // for displaying only specific list items
   useEffect(() => {
+    if (!user) return;
+
     let newList;
+    // showing all items;
     if (filteredBy === 'all') {
       newList = user.shoppingList;
     }
+    //showing items with primary: true;
     if (filteredBy === 'primary') {
       newList = user.shoppingList.filter((item) => item.primary);
     }
+
+    // showing items with specific category;
     if (
       filteredBy === 'groceries' ||
       filteredBy === 'home' ||
@@ -28,11 +41,15 @@ function ShoppingList() {
         (item) => item.category === filteredBy
       );
     }
-    setFilteredList(newList);
-  }, [filteredBy, user.shoppingList]);
 
-  const deleteItemHandler = (idx) => {
-    const newList = user.shoppingList.filter((_, i) => i !== idx);
+    // setting filtered list, depending on the filter used,
+    setFilteredList(newList);
+  }, [filteredBy, user]);
+
+  // deleting item from the user shopping list and updating backend;
+  const deleteItemHandler = (item) => {
+    const theItem = user.shoppingList.find((el) => el === item);
+    const newList = user.shoppingList.filter((item) => item !== theItem);
 
     fetch('http://localhost:5000/user', {
       method: 'PATCH',
@@ -46,6 +63,12 @@ function ShoppingList() {
     });
   };
 
+  // setting filterBy value
+  const onFilterValueChange = (e) => {
+    setFilteredBy(e.target.value);
+  };
+
+  // helper variables
   let list =
     user &&
     filteredList.map((item, idx) => (
@@ -55,7 +78,7 @@ function ShoppingList() {
         description={item.description}
         category={item.category}
         primary={item.primary}
-        onDelete={() => deleteItemHandler(idx)}
+        onDelete={() => deleteItemHandler(item)}
       />
     ));
 
@@ -65,10 +88,6 @@ function ShoppingList() {
     ) : (
       list
     );
-
-  const onFilterValueChange = (e) => {
-    setFilteredBy(e.target.value);
-  };
 
   return (
     <>

@@ -1,0 +1,25 @@
+.spinner {
+  width: 100vw;
+  height: 100vh;
+  background: rgba($primary-color, 0.5);
+
+  &__icon-cart {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: $secondary-color;
+    animation: moving 2s ease-in-out infinite;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .spinner {
+    &__icon-cart {
+      font-size: 7rem;
+      color: $secondary-color;
+      animation: moving 4s ease-in-out infinite;
+    }
+  }
+}

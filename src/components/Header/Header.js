@@ -3,14 +3,21 @@ import UserControl from '../UserControl/UserControl';
 import { UserContext } from '../../App';
 
 function Header() {
+  // user context
   const userContext = useContext(UserContext);
+
+  // state
   const [user, setUser] = useState(null);
 
+  // setting user
   useEffect(() => {
     setUser(userContext.user);
   }, [userContext.user]);
 
-  const greeting = (name) => {
+  // functions
+
+  // helper greeting function to get current hours and change text depending on that
+  const greeting = () => {
     const time = new Date().getHours();
 
     if (time <= 12) {
@@ -22,6 +29,7 @@ function Header() {
     }
   };
 
+  // helper function to transform name with first uppercased letter
   const transformedName = (name) => {
     const transformedName = name[0].toUpperCase() + name.slice(1);
     return transformedName;

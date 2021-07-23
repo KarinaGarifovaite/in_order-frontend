@@ -3,21 +3,33 @@ import { useHistory } from 'react-router-dom';
 import { RiUserSettingsFill } from 'react-icons/ri';
 import Modal from '../Modal/Modal';
 import { UserContext } from '../../App';
+
 function UserControl() {
+  //user context
   const userContext = useContext(UserContext);
+
+  //states
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState(false);
+
+  //useHistory
   const history = useHistory();
+
+  //functions
+
+  // for toggling ul with logout and delete
   const showControlsHandler = () => {
     setShow((prev) => !prev);
   };
 
+  // for logging user out, removing token, redirecting
   const logoutHandler = () => {
     localStorage.removeItem('token');
     history.replace('/');
     userContext.setIsAuth(false);
   };
 
+  // deleting users account from backend, removing token from local storage, redirecting user;
   const deleteAccountHandler = () => {
     let token = localStorage.getItem('token');
     fetch('http://localhost:5000/user', {
@@ -32,6 +44,7 @@ function UserControl() {
     history.replace('/');
   };
 
+  // showing and hiding confirmation modal
   const showModal = () => {
     setShow(false);
     setModal(true);

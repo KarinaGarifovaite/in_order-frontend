@@ -1,6 +1,7 @@
 import React from 'react';
 
 function FormControl(props) {
+  // props
   const { id, labelText, type, placeholder, value, onChange, checked } = props;
   return (
     <div className='form-control'>

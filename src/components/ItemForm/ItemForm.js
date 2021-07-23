@@ -4,8 +4,13 @@ import Button from '../Button/Button';
 import { UserContext } from '../../App';
 
 function ItemForm(props) {
+  // props
   const { hideForm } = props;
+
+  // user context
   const { user } = useContext(UserContext);
+
+  // states
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -14,11 +19,16 @@ function ItemForm(props) {
   });
   const [message, setMessage] = useState('');
 
+  //functions
+
+  // setting form info
   const setItemInfo = (e) => {
     e.target.name === 'primary'
       ? setFormData({ ...formData, [e.target.name]: e.target.checked })
       : setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  // submiting new item to backend
   const itemInfoSubmitHandler = (e) => {
     e.preventDefault();
     if (formData.title === '' || formData.category === '') {
@@ -34,13 +44,17 @@ function ItemForm(props) {
         shoppingList: [...user.shoppingList, formData],
       }),
     });
+    // cleaning form inputs
     setFormData({
       title: '',
       description: '',
       category: '',
       primary: false,
     });
+
     setMessage('Added to the list!');
+
+    // cleaning message after 1s
     setTimeout(() => {
       setMessage('');
     }, 1000);

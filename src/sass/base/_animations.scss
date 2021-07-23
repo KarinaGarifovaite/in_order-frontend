@@ -68,3 +68,17 @@
     transform: translate(-50%, -50%) translateY(0);
   }
 }
+
+@keyframes moving {
+  0% {
+    left: 20%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    left: 80%;
+    opacity: 0;
+  }
+}
