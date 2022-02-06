@@ -26,7 +26,7 @@ function App() {
 
     // and if user is authenticated, getting users info from the backend
     if (isAuth) {
-      fetch('https://in-order-app.herokuapp.com/user', {
+      fetch('http://localhost:5000/user', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

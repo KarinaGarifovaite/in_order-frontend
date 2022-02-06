@@ -34,7 +34,7 @@ function ItemForm(props) {
     if (formData.title === '' || formData.category === '') {
       return setMessage('* fields are required!');
     }
-    fetch('https://in-order-app.herokuapp.com/user', {
+    fetch('http://localhost:5000/user', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

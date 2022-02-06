@@ -32,7 +32,7 @@ function UserControl() {
   // deleting users account from backend, removing token from local storage, redirecting user;
   const deleteAccountHandler = () => {
     let token = localStorage.getItem('token');
-    fetch('https://in-order-app.herokuapp.com/user', {
+    fetch('http://localhost:5000/user', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

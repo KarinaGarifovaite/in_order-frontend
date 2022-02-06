@@ -51,7 +51,7 @@ function ShoppingList() {
     const theItem = user.shoppingList.find((el) => el === item);
     const newList = user.shoppingList.filter((item) => item !== theItem);
 
-    fetch('https://in-order-app.herokuapp.com/user', {
+    fetch('http://localhost:5000/user', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
